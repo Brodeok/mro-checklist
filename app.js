@@ -12,21 +12,37 @@ const items = [
 const listEl = document.getElementById("list");
 const doneEl = document.getElementById("doneCount");
 const totalEl = document.getElementById("totalCount");
+const resetBtn = document.getElementById("resetBtn");
 
-totalEl.textContent = items.length;
 let done = 0;
 
-items.forEach((t) => {
+// 총 항목 수 표시
+totalEl.textContent = items.length;
+
+// 체크리스트 렌더
+items.forEach((text) => {
   const li = document.createElement("li");
   li.className = "item";
-  li.textContent = t;
+  li.textContent = text;
 
   li.addEventListener("click", () => {
-    if (li.classList.contains("checked")) return;
-    li.classList.add("checked");
-    done += 1;
+    if (li.classList.contains("checked")) {
+      li.classList.remove("checked");
+      done -= 1;
+    } else {
+      li.classList.add("checked");
+      done += 1;
+    }
     doneEl.textContent = done;
   });
 
   listEl.appendChild(li);
+});
+
+// Reset 버튼
+resetBtn.addEventListener("click", () => {
+  const items = document.querySelectorAll(".item");
+  items.forEach((el) => el.classList.remove("checked"));
+  done = 0;
+  doneEl.textContent = done;
 });
