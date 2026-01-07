@@ -1,56 +1,137 @@
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Apple SD Gothic Neo", sans-serif;
-  background: #0b0b10;
-  color: #f3f3f7;
+:root{
+  --bg:#0b0b10;
+  --panel:#12121a;
+  --panel2:#101018;
+  --text:#f3f3f7;
+  --muted:#b6b6c7;
+  --line:rgba(255,255,255,.10);
+  --accent:#7c4dff;
+  --ok:#2ee59d;
+  --shadow: 0 18px 60px rgba(0,0,0,.45);
+  --r:24px;
 }
 
-.app {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 24px;
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  background: radial-gradient(1200px 800px at 20% 0%, rgba(124,77,255,.18), transparent 60%),
+              radial-gradient(1200px 800px at 80% 20%, rgba(46,229,157,.10), transparent 55%),
+              var(--bg);
+  color:var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Inter", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.app{max-width:1200px; margin:0 auto; padding:22px; padding-bottom:28px;}
+.top{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; margin-bottom:18px;
+}
+.brand{display:flex; align-items:center; gap:14px;}
+.logo{
+  width:56px; height:56px; border-radius:18px;
+  display:grid; place-items:center;
+  background: linear-gradient(135deg, rgba(124,77,255,.9), rgba(124,77,255,.45));
+  box-shadow: var(--shadow);
+  font-weight:800; letter-spacing:.5px;
+}
+.title{font-size:20px; font-weight:750;}
+.subtitle{font-size:13px; color:var(--muted); margin-top:2px;}
+
+.status{display:flex; align-items:center; gap:12px;}
+.progressText{font-size:13px; color:var(--muted);}
+.progressBar{
+  width:260px; height:10px; border-radius:999px;
+  background: rgba(255,255,255,.08); overflow:hidden;
+  border:1px solid var(--line);
+}
+.progressFill{
+  height:100%; width:0%;
+  background: linear-gradient(90deg, var(--accent), var(--ok));
+  border-radius:999px;
+  transition: width .18s ease;
 }
 
-.logo {
-  font-weight: 800;
-  font-size: 20px;
-  background: linear-gradient(135deg, #7c4dff, #9a7dff);
-  padding: 10px 14px;
-  border-radius: 12px;
+.grid{
+  display:grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap:18px;
 }
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-top: 24px;
+.panel{
+  background: rgba(18,18,26,.86);
+  border:1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  overflow:hidden;
 }
+.doc{padding:22px;}
 
-.panel {
-  background: #12121a;
-  border-radius: 16px;
-  padding: 20px;
+.checklist{display:flex; flex-direction:column;}
+.sectionHead{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 18px 10px 18px;
 }
-
-ul {
-  list-style: none;
-  padding: 0;
+.sectionHead h2{margin:0; font-size:18px;}
+.pill{
+  font-size:12px; color:rgba(255,255,255,.88);
+  padding:8px 10px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.06);
 }
-
-li {
-  padding: 14px;
-  margin-bottom: 10px;
-  background: #1a1a24;
-  border-radius: 12px;
-  cursor: pointer;
+.list{
+  list-style:none;
+  margin:0; padding: 10px 14px 14px 14px;
+  display:flex; flex-direction:column; gap:10px;
+  overflow:auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: calc(100vh - 220px);
 }
+.item{
+  display:flex; align-items:center; gap:12px;
+  padding:14px 14px;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background: rgba(16,16,24,.55);
+  cursor:pointer;
+  user-select:none;
+  touch-action: manipulation;
+}
+.check{
+  width:34px; height:34px; border-radius:12px;
+  display:grid; place-items:center;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.05);
+  flex:0 0 auto;
+}
+.item.checked{
+  border-color: rgba(46,229,157,.28);
+  background: rgba(46,229,157,.10);
+}
+.item.checked .check{
+  border-color: rgba(46,229,157,.55);
+  background: rgba(46,229,157,.18);
+}
+.label{flex:1;}
+.label .name{font-size:14px; font-weight:650;}
+.label .desc{font-size:12px; color:var(--muted); margin-top:3px; line-height:1.35;}
 
-li:hover {
-  background: #232334;
+.footerActions{padding: 0 18px 18px 18px;}
+.btn{
+  width:100%;
+  padding:14px 14px;
+  border-radius:18px;
+  border:1px solid rgba(124,77,255,.45);
+  background: rgba(124,77,255,.22);
+  color:var(--text);
+  font-weight:700;
+  cursor:pointer;
+}
+.btn.ghost{
+  width:auto;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.06);
 }
